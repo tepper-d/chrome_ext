@@ -19,8 +19,12 @@ body {
     background-color: #EDD2E0;
     color: #2B4570;
     border: 3px solid #E49273;
-/*     text-align: center;
-    width: 500px; */
+
+}
+
+.extras {
+    text-align: center;
+    width: 500px;
 }
 
 input {
@@ -31,6 +35,7 @@ input {
     margin-bottom: 4px;
 }
 
+/* BUTTON STYLES. Tepper, 06DEC2022 */
 button {
     background: #2B4570;
     color: #E49273;
@@ -39,6 +44,15 @@ button {
     font-weight: bold;
 }
 
+#button2 {
+    background: #7180AC;
+    color: #E49273;
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+}
+
+/* BOX (DIV) STYLES. Tepper, 06DEC2022 */
 #box {
     cursor: pointer;
     background: #7180AC;
@@ -50,6 +64,33 @@ button {
     font-weight: bold;
 }
 
+#box2 {
+    cursor: pointer;
+    background: #2B4570;
+    padding: 40px;
+    width: 200px;
+    text-align: center;
+    margin: 20px auto;
+    color: #E49273;
+    font-weight: bold;
+}
+
+/* LIST STYLES. Tepper, 06DEC2022 */
+ul {
+    margin-top: 20px;
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    margin-top: 5px;
+}
+
+li a {
+    color: #419D78;
+}
+
+/* FOOTER. Tepper, 06DEC2022 */
 footer {
     font-family: 'Trebuchet MS', sans-serif;
     font-display: block;
