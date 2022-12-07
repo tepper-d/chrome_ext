@@ -61,69 +61,70 @@ Practice Part 3, https://scrimba.com/playlist/pQgXphg
         a. Store the delete button in a var
         b. Listen for double clicks on the delete button
         c. When clicked, clear localStorage, myLeads, and the DOM
+    LESSON 48. REFACTOR renderLeads() to use as a parameter
+        a. Refactor renderLeads() to take a parameter instead of the global var myLeads
+        b. Change all other renderLeads() occurences
+    LESSON 49. CREATE THE tabBtn
+        a. Store the Save Tab btn in var tabBtn
+        b. Listen for clicks on tabBtn that logs a website to the console
+    LESSON 50. SAVE THE TAB URL
+        Save the tab url instead of logging it
 Dominique Tepper, 30NOV2022 */
 
 // DOM ELEMENTS
 const inputBtn = document.getElementById("input-btn");
 const clearBtn = document.getElementById("clear-btn"); // 42a
+const tabBtn = document.getElementById("tab-btn");
 const inputEl = document.getElementById("input-el");
 const ulEl = document.getElementById("ul-el");
 
 // GLOBAL VARS
 let myLeads = [];
 let leadsFromLocalStorage = JSON.parse(localStorage.getItem(myLeads));    // 36a, 36b
+const tabs = [{url: "https://www.pierce.ctc.edu/"}];
 
+// evaluates for values in myLeads to render
 if (leadsFromLocalStorage) {
     myLeads = leadsFromLocalStorage;
-    renderLeads();
+    render(myLeads);
 }
 
-inputBtn.addEventListener("click", function() {
-    console.log("button clicked!");
-    console.log(leadsFromLocalStorage); // 36c
 
+// 21a. FOR LOOP WRAPPED IN A FXN. Tepper, 06DEC2022
+const render = (leads) => {
+    let printLeads = ""; // 20a
+
+    // 12. USE FOR LOOP. Tepper, 04DEC2022
+    for (let i = 0; i < leads.length; i++) {
+
+        // 24, 28. TEMPLATE STRING. Tepper, 06DEC2022.
+        printLeads += `<li><a target='_blank' href='${leads[i]}'>${leads[i]}</a></li>`;
+        console.log(printLeads);
+        ulEl.innerHTML = printLeads; // 18b, 20c
+    }
+}
+
+// add new lead button
+inputBtn.addEventListener("click", function() {
     // 11. PUSH THE VALUE FROM THE INPUT FIELD. Tepper, 06DEC2022
     const newInput = document.getElementById('input-el').value;
     myLeads.push(newInput);
-    console.log(myLeads);
 
     // 35. saves myLeads to localStorage
     localStorage.setItem("myLeads", JSON.stringify(myLeads));
 
-    console.log(typeof myLeads);
-    console.log(localStorage.getItem("myLeads"));
-
-    renderLeads(); // 21b
+    render(myLeads); // 21b
     inputEl.value = ""; // 22. CLEAR INPUT FIELD. Tepper, 06DEC2022
     inputEl.focus();
-
 });
 
-// 21a. FOR LOOP WRAPPED IN A FXN. Tepper, 06DEC2022
-const renderLeads = () => {
-    let printLeads = ""; // 20a
 
-    // 12. USE FOR LOOP. Tepper, 04DEC2022
-    for (let i = 0; i < myLeads.length; i++) {
-
-        // 18a, 20b, 23a, 23b
-        // printLeads += "<li>" + "<a target='_blank' href='" + myLeads[i] + "' >" + myLeads[i] + "</a></li>"; 
-
-        // 24, 28. TEMPLATE STRING. Tepper, 06DEC2022.
-        printLeads += `<li><a target='_blank' href='${myLeads[i]}'>${myLeads[i]}</a></li>`;
-        console.log(printLeads);
-        ulEl.innerHTML = printLeads; // 18b, 20c
-        
-
-        // const li = document.createElement("li"); // 19b
-        // li.textContent = myLeads[i]; // 19c
-        // ulEl.append(li); // 19d
-    }
-    
-    // Lesson 10
-    // myLeads.push("www.awesomelead.com");
-    // console.log(myLeads);
-}
+// 49. TAB BTN. Tepper, 07DEC2022.
+tabBtn.addEventListener("click", function(){
+    myLeads.push(tabs[0].url);
+    localStorage.setItem("myLeads", JSON.stringify(myLeads));
+    render(myLeads);
+})
 
 // 42. clear button
 clearBtn.addEventListener("dblclick", function() {

@@ -52,7 +52,7 @@ button {
     font-weight: bold;
 }
 
-#input-btn {
+.button1 {
     background: #2B4570;
     color: #E49273;
     padding: 10px 20px;
@@ -60,7 +60,7 @@ button {
     font-weight: bold;
 }
 
-#clear-btn {
+.button2 {
     background: #EDD2E0;
     color: #2B4570;
     padding: 10px 20px;
