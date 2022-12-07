@@ -69,19 +69,19 @@ Practice Part 3, https://scrimba.com/playlist/pQgXphg
         b. Listen for clicks on tabBtn that logs a website to the console
     LESSON 50. SAVE THE TAB URL
         Save the tab url instead of logging it
+    LESSON 52. USE THE CHROME API TO GET THE TAB
 Dominique Tepper, 30NOV2022 */
 
 // DOM ELEMENTS
 const inputBtn = document.getElementById("input-btn");
 const clearBtn = document.getElementById("clear-btn"); // 42a
-const tabBtn = document.getElementById("tab-btn");
+const tabBtn = document.getElementById("tab-btn"); //49
 const inputEl = document.getElementById("input-el");
 const ulEl = document.getElementById("ul-el");
 
 // GLOBAL VARS
 let myLeads = [];
 let leadsFromLocalStorage = JSON.parse(localStorage.getItem(myLeads));    // 36a, 36b
-const tabs = [{url: "https://www.pierce.ctc.edu/"}];
 
 // evaluates for values in myLeads to render
 if (leadsFromLocalStorage) {
@@ -107,6 +107,7 @@ const render = (leads) => {
 // add new lead button
 inputBtn.addEventListener("click", function() {
     // 11. PUSH THE VALUE FROM THE INPUT FIELD. Tepper, 06DEC2022
+    console.log("new lead");
     const newInput = document.getElementById('input-el').value;
     myLeads.push(newInput);
 
@@ -118,12 +119,14 @@ inputBtn.addEventListener("click", function() {
     inputEl.focus();
 });
 
-
 // 49. TAB BTN. Tepper, 07DEC2022.
 tabBtn.addEventListener("click", function(){
-    myLeads.push(tabs[0].url);
-    localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    render(myLeads);
+    console.log("tab-btn"); // 49
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        myLeads.push(tabs[0].url); // 50
+        localStorage.setItem("myLeads", JSON.stringify(myLeads));
+        render(myLeads);
+    })
 })
 
 // 42. clear button

@@ -6,6 +6,7 @@ Practice Part 3, https://scrimba.com/playlist/pQgXphg
 
     LESSON 30. PREPARING THE DEPLOYMENT
         Create json file
+    LESSON 52. USE THE CHROME API TO GET THE TAB
 */
 
 {
@@ -15,5 +16,8 @@ Practice Part 3, https://scrimba.com/playlist/pQgXphg
     "action": {
         "default_popup": "index.html",
         "default_icon": "snoop.png"
-    }
+    },
+    "permissions": [
+        "tabs"
+    ]
 }
