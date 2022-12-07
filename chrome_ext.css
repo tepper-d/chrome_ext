@@ -52,8 +52,40 @@ button {
     font-weight: bold;
 }
 
+#input-btn {
+    background: #2B4570;
+    color: #E49273;
+    padding: 10px 20px;
+    border: 3px solid #2B4570;
+    font-weight: bold;
+}
+
+#clear-btn {
+    background: #EDD2E0;
+    color: #2B4570;
+    padding: 10px 20px;
+    border: 3px solid #2B4570;
+    font-weight: bold;
+}
+
+#button-a {
+    text-decoration: none;
+    color: #E49273;
+}
+
 /* BOX (DIV) STYLES. Tepper, 06DEC2022 */
 #box {
+    cursor: pointer;
+    background: #7180AC;
+    padding: 40px;
+    width: 200px;
+    text-align: center;
+    margin: 20px auto;
+    color: #E49273;
+    font-weight: bold;
+}
+
+#box1 {
     cursor: pointer;
     background: #7180AC;
     padding: 40px;

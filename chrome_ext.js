@@ -45,25 +45,53 @@ Practice Part 3, https://scrimba.com/playlist/pQgXphg
     LESSON 24. TEMPLATE STRING
     LESSON 28. REFACTOR THE APP TO USE A TEMPLATE STRING
     LESSON 29. STYLE THE LIST
-
+    LESSON 35. SAVE THE LEADS TO localStorage
+        a. Save myLeads to localStorage
+        b. Use JSON.stringify()
+        c. Verify that it works
+    LESSON 36. GET THE LEADS FROM localStorage
+        a. Use JSON.parse() to get the leads from localStorage
+        b. Store it in var leadsFromLocalStorage
+        c. log leadsFromLocalStorage
+    LESSON 39. CHECKING localStorage BEFORE RENDERING
+        a. Check is leadsFromLocalStorage is truthy
+        b. set myLeads to its value if true
+        c. call renderLeads()
+    LESSON 42. MAKE THE DELETE BUTTON WORK
+        a. Store the delete button in a var
+        b. Listen for double clicks on the delete button
+        c. When clicked, clear localStorage, myLeads, and the DOM
 Dominique Tepper, 30NOV2022 */
 
 // DOM ELEMENTS
 const inputBtn = document.getElementById("input-btn");
+const clearBtn = document.getElementById("clear-btn"); // 42a
 const inputEl = document.getElementById("input-el");
 const ulEl = document.getElementById("ul-el");
 
 // GLOBAL VARS
 let myLeads = [];
+let leadsFromLocalStorage = JSON.parse(localStorage.getItem(myLeads));    // 36a, 36b
+
+if (leadsFromLocalStorage) {
+    myLeads = leadsFromLocalStorage;
+    renderLeads();
+}
 
 inputBtn.addEventListener("click", function() {
     console.log("button clicked!");
-    ulEl.textContent = "";
-    
+    console.log(leadsFromLocalStorage); // 36c
+
     // 11. PUSH THE VALUE FROM THE INPUT FIELD. Tepper, 06DEC2022
     const newInput = document.getElementById('input-el').value;
     myLeads.push(newInput);
     console.log(myLeads);
+
+    // 35. saves myLeads to localStorage
+    localStorage.setItem("myLeads", JSON.stringify(myLeads));
+
+    console.log(typeof myLeads);
+    console.log(localStorage.getItem("myLeads"));
 
     renderLeads(); // 21b
     inputEl.value = ""; // 22. CLEAR INPUT FIELD. Tepper, 06DEC2022
@@ -85,6 +113,7 @@ const renderLeads = () => {
         printLeads += `<li><a target='_blank' href='${myLeads[i]}'>${myLeads[i]}</a></li>`;
         console.log(printLeads);
         ulEl.innerHTML = printLeads; // 18b, 20c
+        
 
         // const li = document.createElement("li"); // 19b
         // li.textContent = myLeads[i]; // 19c
@@ -96,6 +125,15 @@ const renderLeads = () => {
     // console.log(myLeads);
 }
 
+// 42. clear button
+clearBtn.addEventListener("dblclick", function() {
+    console.log("Storage cleared.");
+    localStorage.clear();
+    myLeads = [];
+    inputEl.value = "";
+    inputEl.focus();
+    ulEl.innerHTML = "";
+});
 
 /* FOOTER. Tepper, 06NOV2022 *******************************************/
 const today = new Date();

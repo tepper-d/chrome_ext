@@ -10,29 +10,56 @@ Dominique Tepper, 06DEC2022 */
 
 /*
 LESSON 25. WRITE YOUR FIRST TEMPLATE STRING
-        Convert a concatenated string into a template literal
-    LESSON 26. MAKE THE TEMPLATE STRING EVEN MORE DYNAMIC
-        Create a new variable and use it
-    LESSON 27. TEMPLATE STRING ON MULTIPLE LINES
-        Break the template string into multiple lines.
+    Convert a concatenated string into a template literal
+LESSON 26. MAKE THE TEMPLATE STRING EVEN MORE DYNAMIC
+    Create a new variable and use it
+LESSON 27. TEMPLATE STRING ON MULTIPLE LINES
+    Break the template string into multiple lines.
+LESSON 43. WRITE YOUR FIRST FUNCTION PARAMETER
 Tepper, 06DEC2022 */
 
-// DOM
+// DOM - GENERATE REINDEER
 const reindeerTagH= document.getElementById("reindeerTag-h");
 const reindeerTagP = document.getElementById("reindeerTag-p");
 const reindeerTagBtn = document.getElementById("reindeerTag-btn");
+const greetingEl = document.getElementById("greeting-el"); // 43a
 
 // ARRAYS
 let tagNum = [];
+let reindeerKey = `[]`;
 const reindeerNames = ["Dasher", "Dancer", "Prancer", "Vixen", "Comet", "Cupid", "Dunder", "Blixem", "Flossie", "Glossie", "Racer", "Pacer", "Reckless", "Speckless", "Fearless", "Peerless", "Ready", "Steady"];
 const serverRegions = ["NAE", "NAW", "EU", "OCE", "BR", "ASIA", "ME"]; // 26
+
+// RANDOMIZERS
+const x = Math.floor(Math.random() * reindeerNames.length); // greeting
+const y = Math.floor(Math.random() * reindeerNames.length); // new tag
+const z = Math.floor(Math.random() * serverRegions.length); // server
+
+// OTHER VARS
+let currentReindeer = "";
+let newReindeer = "";
 
 reindeerTagH.innerHTML = `<h2>Generate Your Reindeer Tag</h2>`;
 reindeerTagP.textContent = `Which reindeer will you be?`;
 reindeerTagBtn.innerHTML = "<p></p><button id='button2'>GENERATE</button>";
 
+/* function greetUser (reindeer) {
+    greetingEl.textContent = "Welcome back, " + reindeer + "!";
+}
+greetUser(reindeerNames[x]); */
+
+greetingEl.textContent = "Hey there, stranger...";
+
+greetingEl.addEventListener("mouseover", function() {
+    const greetUser = (reindeer) => {
+        greetingEl.textContent = "Oh, it's you! Welcome back, " + reindeer + "!";
+    }
+    console.log("greeting mouseover detected.");
+    greetUser(reindeerNames[x]);
+})
+
 // generates random nums for numeric tag
-const reindeerGenerator = () => {
+const tagGenerator = () => {
     tagNum = [];
 
     for (let i = 0; i < 4; i++) {
@@ -42,29 +69,73 @@ const reindeerGenerator = () => {
     }
 }
 
+// GET NEW REINDEER ASSIGNMENT
 reindeerTagBtn.addEventListener("click", function(){
     // Picks a random reindeer name from array
-    let reindeerRandomizer = Math.floor(Math.random() * reindeerNames.length);
-    let j = reindeerRandomizer;
-    console.log(reindeerNames[j]);
+    console.log("Generating new reindeer...");
+    let assignedReindeer = reindeerNames[y];
+    console.log(assignedReindeer);
 
     // Picks random server region from array
-    let serverRandomizer = Math.floor(Math.random() * serverRegions.length);
-    let k = serverRandomizer;
-    console.log(serverRegions[k]);
+    console.log("Selecting optimized region");
+    let assignedRegion = serverRegions[z];
+    console.log(assignedRegion);
 
-    // generates random nums
-    reindeerGenerator();
+    // generates random nums for numeric tag
+    tagGenerator();
 
     // Reindeer tag concat
-    let reindeerTag = `${reindeerNames[j]}#${tagNum[1]}${tagNum[2]}${tagNum[2]}${tagNum[3]}`;
-
+    let reindeerTag = `${reindeerNames[reindeerRandomizer]}#${tagNum[1]}${tagNum[2]}${tagNum[2]}${tagNum[3]}`;
 
     reindeerTagH.innerHTML = `<h2>${reindeerTag}</h2>`;
-    reindeerTagP.innerHTML = `<br><p>Your reindeer is ${reindeerNames[j]}.</p><p></p>
-                                <p>This option is optimized for the ${serverRegions[k]} region.</p>`;
+    reindeerTagP.innerHTML = `<br><p>Your reindeer is ${assignedReindeer}.</p><p></p>
+                                <p>This option is optimized for the ${assignedRegion} region.</p>`;
+
+    // 33a. Save generated reindeer to localStorage
+    reindeerKey = JSON.parse(reindeerKey);              // 34a
+    localStorage.setItem(reindeerTag, assignedRegion);  // 33a
+    reindeerKey.push(reindeerTag);                      // 34b
+    console.log("New reindeer saved to localStorage.")
+
+    reindeerKey = JSON.stringify(reindeerKey);          // 34c
+    console.log(typeof reindeerKey);                    // 34d
+    console.log(reindeerKey);
 });
 
+/* 
+LESSON 33. YOUR FIRST localStorage
+    a. Save a key-value pair in localStorage                    // localStorage.setItem(key, value)
+    b. Refresh the page, get the value, and log to console      // localStorage.getItem(key, value)
+    c. Clear localStorage                                       // localStorage.clear()
+LESSON 34. STORING ARRAYS IN localStorage
+    a. Turn new array reindeerKey into a string
+    b. Push var reindeerTag to new array reindeerKey every time a new reindeer tag is generated
+    c. Turn reindeerKey array into string again
+    d. Console.log string using typeof to verify that it is a string
+Tepper, 06DEC2022 */
+
+// DOM - ARCHIVED REINDEERS
+const archivedTagShowBtn = document.getElementById("archivedTag-showBtn");
+const archivedTagClearBtn = document.getElementById("archivedTag-clearBtn");
+const archivedTagH = document.getElementById("archivedTag-h");
+const archivedTagP = document.getElementById("archivedTag-p");
+
+// VIEW ARCHIVED REINDEER ASSIGNMENTS
+archivedTagShowBtn.innerHTML = "<p></p><button id='button1'>VIEW ALL</button>";
+archivedTagClearBtn.innerHTML = "<p></p><button id='button1'>CLEAR ALL</button>";
+archivedTagH.innerHTML = `<h2>View Archived Reindeer Tags</h2>`;
+archivedTagP.innerHTML = `<p><i>Nothing to show right now. Check console.</i></p>`;
+
+// show all reindeers saved in localStorage
+archivedTagShowBtn.addEventListener("click", function() {
+    console.log("Nothing to show right now.");
+});
+
+// clears localStorage
+archivedTagClearBtn.addEventListener("click", function(){
+    console.log("Storage cleared.");
+    localStorage.clear();
+});
 
 /* 
 LESSON 6. WRITE YOUR FIRST addEventListener()
