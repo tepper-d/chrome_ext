@@ -16,6 +16,7 @@ LESSON 26. MAKE THE TEMPLATE STRING EVEN MORE DYNAMIC
 LESSON 27. TEMPLATE STRING ON MULTIPLE LINES
     Break the template string into multiple lines.
 LESSON 43. WRITE YOUR FIRST FUNCTION PARAMETER
+LESSON 44. FUNCTIONS WITH MULTIPLE PARAMETEERS
 Tepper, 06DEC2022 */
 
 // DOM - GENERATE REINDEER
@@ -43,19 +44,19 @@ reindeerTagH.innerHTML = `<h2>Generate Your Reindeer Tag</h2>`;
 reindeerTagP.textContent = `Which reindeer will you be?`;
 reindeerTagBtn.innerHTML = "<p></p><button id='button2'>GENERATE</button>";
 
+greetingEl.textContent = "Hey there, stranger..."; // default welcome greeting for 43, 44
+
 /* function greetUser (reindeer) {
     greetingEl.textContent = "Welcome back, " + reindeer + "!";
 }
 greetUser(reindeerNames[x]); */
 
-greetingEl.textContent = "Hey there, stranger...";
-
 greetingEl.addEventListener("mouseover", function() {
-    const greetUser = (reindeer) => {
-        greetingEl.textContent = "Oh, it's you! Welcome back, " + reindeer + "!";
+    const greetUser = (reindeer, server) => {
+        greetingEl.textContent = "Oh, it's you. Welcome back, " + reindeer + "! Any latency issues in " + server + " region?";
     }
     console.log("greeting mouseover detected.");
-    greetUser(reindeerNames[x]);
+    greetUser(reindeerNames[x], serverRegions[z]);
 })
 
 // generates random nums for numeric tag
@@ -137,8 +138,30 @@ archivedTagClearBtn.addEventListener("click", function(){
     localStorage.clear();
 });
 
-/* 
-LESSON 6. WRITE YOUR FIRST addEventListener()
+/* LESSON 47. ARRAYS AS PARAMETERS
+    a. create a function that returns the first item in the array
+    b. call fxn with an array as an argument to verify that it works
+Tepper, 07DEC2022 */
+const get5th = (array) => {
+    return array[4];
+}
+console.log("reindeerNames[4] is " + get5th(reindeerNames));
+console.log("serverRegions[4] is " + get5th(serverRegions));
+
+/* LESSON 45. NUMBERS AS FUNCTION PARAMETERS
+    Create the add() function that adds two numbers together and returns the sum
+    vars x, y, z are random numbers declared on lines 35-37
+Tepper, 07DEC2022 */
+/* const add = (a,b) => {
+    return a + b;
+}
+console.log(`random nums are: x=${x}, y=${y}, z=${z}`);
+console.log("x+y = " + add(x, y));
+console.log("x+z = " + add(x, z));
+console.log("y+z = " + add(y, z));
+ */
+
+/* LESSON 6. WRITE YOUR FIRST addEventListener()
     1. Grab the box from the DOM and store it in a variable
     2. Add  click event listener to the box
     3. Log "I want to open the box"
@@ -166,8 +189,6 @@ boxBtn.addEventListener("click", function() {
 
     boxP.innerHTML = "Added to cart!";
 });
-
-
 
 
 
