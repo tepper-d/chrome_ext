@@ -1,13 +1,14 @@
-/*
-CIS 124: Introduction to JavaScript
-Module 6: Scrimba Exercises Part 2
-Build a Chrome Extension, https://scrimba.com/playlist/pPD7Kt4
-Practice Part 3, https://scrimba.com/playlist/pQgXphg
+/* 
+    CIS 124: Introduction to JavaScript
+    Module 6: Scrimba Exercises Part 2
+    Build a Chrome Extension, https://scrimba.com/playlist/pPD7Kt4
+    Practice Part 3, https://scrimba.com/playlist/pQgXphg
 
-    LESSON 30. PREPARING THE DEPLOYMENT
-        Create json file
-    LESSON 52. USE THE CHROME API TO GET THE TAB
+        LESSON 30. PREPARING THE DEPLOYMENT
+            Create json file
+        LESSON 52. USE THE CHROME API TO GET THE TAB 
 */
+
 
 {
     "manifest_version": 3,
